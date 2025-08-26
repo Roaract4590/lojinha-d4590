@@ -267,9 +267,7 @@ export default function RotaractLandingPage() {
               Produtos premium que representam os valores e a elegância do Rotaract. Qualidade superior para
               rotaractianos que fazem a diferença.
             </p>
-            <Button size="lg" className="text-lg px-8 py-6" onClick={() => scrollToSection("camisetas")}>
-              Explorar Coleção
-            </Button>
+           
           </div>
         </div>
       </section>
@@ -283,10 +281,7 @@ export default function RotaractLandingPage() {
             <div className="container mx-auto">
               {section.category === "Camisetas" && (
                 <div className="mb-16">
-                  <div className="text-center mb-8">
-                    <Badge className="mb-4 text-sm px-4 py-2">Produto em Destaque</Badge>
-                    <h2 className="text-2xl md:text-3xl font-bold text-foreground">Mais Vendido</h2>
-                  </div>
+    
                   <Card className="max-w-4xl mx-auto group hover:shadow-xl transition-all duration-300">
                     <CardContent className="p-0">
                       <div className="grid md:grid-cols-2 gap-0">
