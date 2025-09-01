@@ -1,11 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import { ShoppingCart, Menu, X } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
+import Image from "next/image"
 
 interface Product {
   id: number
@@ -143,23 +144,14 @@ const products: Product[] = [
 const featuredProduct = products[1] // Polo Distrito 4590
 
 export default function RotaractLandingPage() {
-  const [cart, setCart] = useState<Product[]>([])
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-  const handleBuyNow = (product: Product) => {
-    if (!isLoggedIn) {
-      // Redirecionar para login
-      window.location.href = `/login?redirect=/product/${product.id}`
-    } else {
-      addToCart(product)
-      // Redirecionar para carrinho
-      window.location.href = "/cart"
-    }
-  }
+  const handleBuyNow = (product: Product, quantity = 1) => {
+    const whatsappNumber = "5511999999999" // Substitua pelo número real
+    const message = `Olá! Gostaria de comprar:\n\n*${product.name}*\nQuantidade: ${quantity}\nPreço: R$ ${product.price.toFixed(2).replace(".", ",")}\nTotal: R$ ${(product.price * quantity).toFixed(2).replace(".", ",")}\n\nPoderia me ajudar com o pedido?`
 
-  const addToCart = (product: Product) => {
-    setCart([...cart, product])
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+    window.open(whatsappUrl, "_blank")
   }
 
   const sections = [
@@ -175,77 +167,56 @@ export default function RotaractLandingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       {/* Header Fixo */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-        <div className="container mx-auto px-4 py-4">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
+        <div className="container mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">R</span>
-              </div>
-              <div className="hidden sm:block">
-                <h1 className="font-bold text-lg text-foreground">Rotaract</h1>
-                <p className="text-xs text-muted-foreground">Distrito 4590</p>
-              </div>
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/rotaract-logo.png"
+                alt="Rotaract Distrito 4590"
+                width={180}
+                height={60}
+                className="h-12 w-auto"
+              />
             </Link>
 
             {/* Navigation - Desktop */}
-            <nav className="hidden md:flex items-center space-x-8">
+            <nav className="hidden md:flex items-center space-x-12">
               {sections.map((section) => (
                 <button
                   key={section.category}
                   onClick={() => scrollToSection(section.category)}
-                  className="text-foreground hover:text-primary transition-colors font-medium"
+                  className="text-black hover:text-[#d41367] transition-colors font-light text-sm tracking-wide uppercase"
                 >
                   {section.title}
                 </button>
               ))}
             </nav>
 
-            {/* Cart e Menu Mobile */}
-            <div className="flex items-center space-x-4">
-              <Link href="/cart">
-                <Button variant="outline" size="sm" className="relative bg-transparent">
-                  <ShoppingCart className="w-4 h-4" />
-                  {cart.length > 0 && (
-                    <Badge className="absolute -top-2 -right-2 w-5 h-5 p-0 flex items-center justify-center text-xs">
-                      {cart.length}
-                    </Badge>
-                  )}
-                </Button>
-              </Link>
-
-              {isLoggedIn ? (
-                <Link href="/account">
-                  <Button variant="ghost" size="sm">
-                    Minha Conta
-                  </Button>
-                </Link>
-              ) : (
-                <Link href="/login">
-                  <Button variant="ghost" size="sm">
-                    Entrar
-                  </Button>
-                </Link>
-              )}
-
+            <div className="flex items-center space-x-6">
               {/* Menu Mobile */}
-              <Button variant="ghost" size="sm" className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                {isMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+              <Button
+                variant="ghost"
+                size="sm"
+                className="md:hidden hover:bg-gray-50"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+              >
+                {isMenuOpen ? <X className="w-5 h-5 text-black" /> : <Menu className="w-5 h-5 text-black" />}
               </Button>
             </div>
           </div>
 
           {/* Menu Mobile Dropdown */}
           {isMenuOpen && (
-            <nav className="md:hidden mt-4 pb-4 border-t border-border pt-4">
+            <nav className="md:hidden mt-6 pb-6 border-t border-gray-100 pt-6">
               {sections.map((section) => (
                 <button
                   key={section.category}
                   onClick={() => scrollToSection(section.category)}
-                  className="block w-full text-left py-2 text-foreground hover:text-primary transition-colors font-medium"
+                  className="block w-full text-left py-3 text-black hover:text-[#d41367] transition-colors font-light text-sm tracking-wide uppercase"
                 >
                   {section.title}
                 </button>
@@ -256,18 +227,17 @@ export default function RotaractLandingPage() {
       </header>
 
       {/* Hero Section */}
-      <section className="pt-24 pb-16 px-4">
+      <section className="pt-32 pb-24 px-6">
         <div className="container mx-auto text-center">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 text-balance">
-              Coleção Exclusiva
-              <span className="text-primary block">Rotaract Distrito 4590</span>
+            <h1 className="text-5xl md:text-7xl font-light text-black mb-8 text-balance tracking-tight">
+              ROTARACT
+              <span className="block text-[#d41367] font-extralight">DISTRITO 4590</span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 text-pretty">
-              Produtos premium que representam os valores e a elegância do Rotaract. Qualidade superior para
-              rotaractianos que fazem a diferença.
+            <p className="text-lg md:text-xl text-gray-600 mb-12 text-pretty font-light leading-relaxed max-w-2xl mx-auto">
+              Uma coleção exclusiva que celebra a excelência e o compromisso com o serviço. Cada peça é cuidadosamente
+              criada para representar os valores do Rotaract.
             </p>
-           
           </div>
         </div>
       </section>
@@ -277,40 +247,51 @@ export default function RotaractLandingPage() {
         const sectionProducts = products.filter((p) => p.category === section.category)
 
         return (
-          <section key={section.category} id={section.category.toLowerCase()} className="py-16 px-4">
+          <section key={section.category} id={section.category.toLowerCase()} className="py-20 px-6">
             <div className="container mx-auto">
               {section.category === "Camisetas" && (
-                <div className="mb-16">
-    
-                  <Card className="max-w-4xl mx-auto group hover:shadow-xl transition-all duration-300">
+                <div className="mb-24">
+                  <Card className="max-w-6xl mx-auto group hover:shadow-2xl transition-all duration-500 border-0 shadow-lg">
                     <CardContent className="p-0">
                       <div className="grid md:grid-cols-2 gap-0">
-                        <div className="aspect-square overflow-hidden">
+                        <div className="aspect-square overflow-hidden bg-gray-50">
                           <img
                             src={featuredProduct.image || "/placeholder.svg"}
                             alt={featuredProduct.name}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                           />
                         </div>
-                        <div className="p-8 flex flex-col justify-center">
-                          <Badge className="w-fit mb-4">Mais Vendido</Badge>
-                          <h3 className="text-2xl md:text-3xl font-bold mb-4 text-foreground">
+                        <div className="p-12 flex flex-col justify-center bg-white">
+                          <Badge className="w-fit mb-6 bg-[#d41367] text-white font-light text-xs tracking-wider uppercase">
+                            Mais Vendido
+                          </Badge>
+                          <h3 className="text-3xl md:text-4xl font-light mb-6 text-black tracking-tight">
                             {featuredProduct.name}
                           </h3>
-                          <p className="text-muted-foreground mb-6 text-pretty">{featuredProduct.description}</p>
-                          <div className="flex items-center gap-4 mb-6">
-                            <span className="text-3xl font-bold text-primary">
+                          <p className="text-gray-600 mb-8 text-pretty font-light leading-relaxed">
+                            {featuredProduct.description}
+                          </p>
+                          <div className="flex items-center gap-6 mb-8">
+                            <span className="text-4xl font-light text-black">
                               R$ {featuredProduct.price.toFixed(2).replace(".", ",")}
                             </span>
-                            <Badge variant="secondary">Frete Grátis</Badge>
+                            <Badge variant="outline" className="border-gray-300 text-gray-600 font-light">
+                              Frete Grátis
+                            </Badge>
                           </div>
                           <div className="flex gap-4">
                             <Link href={`/product/${featuredProduct.id}`} className="flex-1">
-                              <Button variant="outline" className="w-full bg-transparent">
+                              <Button
+                                variant="outline"
+                                className="w-full border-black text-black hover:bg-black hover:text-white transition-all duration-300 font-light text-sm tracking-wide uppercase bg-transparent"
+                              >
                                 Ver Detalhes
                               </Button>
                             </Link>
-                            <Button className="flex-1" onClick={() => handleBuyNow(featuredProduct)}>
+                            <Button
+                              className="flex-1 bg-[#d41367] hover:bg-[#b8115a] text-white font-light text-sm tracking-wide uppercase transition-all duration-300"
+                              onClick={() => handleBuyNow(featuredProduct)}
+                            >
                               Comprar Agora
                             </Button>
                           </div>
@@ -321,31 +302,41 @@ export default function RotaractLandingPage() {
                 </div>
               )}
 
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">{section.title}</h2>
+              <h2 className="text-4xl md:text-5xl font-light text-center mb-16 text-black tracking-tight">
+                {section.title}
+              </h2>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
                 {sectionProducts.map((product) => (
-                  <Card key={product.id} className="group hover:shadow-lg transition-all duration-300 hover:scale-105">
-                    <CardContent className="p-0">
+                  <Card
+                    key={product.id}
+                    className="group hover:shadow-xl transition-all duration-500 border-0 shadow-md overflow-hidden"
+                  >
+                    <CardContent className="p-0 h-full flex flex-col">
                       <Link href={`/product/${product.id}`}>
-                        <div className="aspect-[3/4] overflow-hidden rounded-t-lg cursor-pointer">
+                        <div className="aspect-square overflow-hidden bg-gray-50 cursor-pointer">
                           <img
                             src={product.image || "/placeholder.svg"}
                             alt={product.name}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                           />
                         </div>
                       </Link>
-                      <div className="p-6">
-                        <Link href={`/product/${product.id}`}>
-                          <h3 className="font-bold text-lg mb-2 text-foreground text-balance hover:text-primary transition-colors cursor-pointer">
-                            {product.name}
-                          </h3>
-                        </Link>
-                        <p className="text-2xl font-bold text-primary mb-4">
-                          R$ {product.price.toFixed(2).replace(".", ",")}
-                        </p>
-                        <Button className="w-full" onClick={() => handleBuyNow(product)}>
+                      <div className="p-8 bg-white flex-1 flex flex-col justify-between">
+                        <div>
+                          <Link href={`/product/${product.id}`}>
+                            <h3 className="font-light text-lg mb-4 text-black hover:text-[#d41367] transition-colors cursor-pointer tracking-wide leading-tight line-clamp-2 min-h-[3.5rem]">
+                              {product.name}
+                            </h3>
+                          </Link>
+                          <p className="text-2xl font-light text-black mb-6 tracking-wide">
+                            R$ {product.price.toFixed(2).replace(".", ",")}
+                          </p>
+                        </div>
+                        <Button
+                          className="w-full bg-[#d41367] hover:bg-[#b8115a] text-white font-light text-sm tracking-wide uppercase transition-all duration-300 py-3"
+                          onClick={() => handleBuyNow(product)}
+                        >
                           Comprar Agora
                         </Button>
                       </div>
@@ -358,20 +349,23 @@ export default function RotaractLandingPage() {
         )
       })}
 
-      {/* Footer */}
-      <footer className="bg-secondary text-secondary-foreground py-12 px-4">
+      <footer className="bg-black text-white py-16 px-6">
         <div className="container mx-auto text-center">
-          <div className="flex items-center justify-center space-x-2 mb-6">
-            <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">R</span>
-            </div>
-            <div>
-              <h3 className="font-bold text-xl">Rotaract Distrito 4590</h3>
-              <p className="text-sm opacity-80">Servir para Transformar</p>
-            </div>
+          <div className="flex items-center justify-center mb-8">
+            <Image
+              src="/rotaract-logo.png"
+              alt="Rotaract Distrito 4590"
+              width={200}
+              height={67}
+              className="h-16 w-auto brightness-0 invert"
+            />
           </div>
-          <p className="text-sm opacity-80 mb-4">© 2024 Rotaract Distrito 4590. Todos os direitos reservados.</p>
-          <p className="text-xs opacity-60">Produtos oficiais do Rotaract International - Distrito 4590</p>
+          <p className="text-sm opacity-70 mb-4 font-light tracking-wide">
+            © 2024 ROTARACT DISTRITO 4590. TODOS OS DIREITOS RESERVADOS.
+          </p>
+          <p className="text-xs opacity-50 font-light tracking-wider uppercase">
+            Produtos Oficiais do Rotaract International
+          </p>
         </div>
       </footer>
     </div>
