@@ -6,7 +6,10 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Loja D4590',
-  description: 'Loja de produtos do Distrito D4590'
+  description: 'Loja de produtos do Distrito D4590',
+  icons: {
+    icon: "/logo.PNG", 
+  },
 }
 
 export default function RootLayout({
