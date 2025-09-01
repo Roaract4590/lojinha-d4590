@@ -361,10 +361,7 @@ export default function RotaractLandingPage() {
             />
           </div>
           <p className="text-sm opacity-70 mb-4 font-light tracking-wide">
-            © 2024 ROTARACT DISTRITO 4590. TODOS OS DIREITOS RESERVADOS.
-          </p>
-          <p className="text-xs opacity-50 font-light tracking-wider uppercase">
-            Produtos Oficiais do Rotaract International
+            © 2025 ROTARACT DISTRITO 4590. TODOS OS DIREITOS RESERVADOS.
           </p>
         </div>
       </footer>
