@@ -147,7 +147,7 @@ export default function RotaractLandingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const handleBuyNow = (product: Product, quantity = 1) => {
-    const whatsappNumber = "5511999999999" 
+    const whatsappNumber = "+5519991666588" 
     const message = `Olá! Gostaria de comprar:\n\n*${product.name}*\nQuantidade: ${quantity}\nPreço: R$ ${product.price.toFixed(2).replace(".", ",")}\nTotal: R$ ${(product.price * quantity).toFixed(2).replace(".", ",")}\n\nPoderia me ajudar com o pedido?`
 
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`

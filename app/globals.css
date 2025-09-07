@@ -4,40 +4,39 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Updated color tokens to match luxury brand design with #d41367 primary and sophisticated neutrals */
-  --background: oklch(1 0 0); /* White */
-  --foreground: oklch(0 0 0); /* Black */
-  --card: oklch(0.97 0 0); /* Light gray for product cards */
-  --card-foreground: oklch(0 0 0); /* Black text on cards */
-  --popover: oklch(1 0 0); /* White */
-  --popover-foreground: oklch(0 0 0); /* Black */
-  --primary: oklch(0.5 0.25 330); /* #d41367 magenta */
-  --primary-foreground: oklch(1 0 0); /* White text on primary */
-  --secondary: oklch(0 0 0); /* Black for secondary elements */
-  --secondary-foreground: oklch(1 0 0); /* White text on secondary */
-  --muted: oklch(0.97 0 0); /* Light gray */
-  --muted-foreground: oklch(0.45 0 0); /* Muted gray text */
-  --accent: oklch(0.5 0.25 330); /* Same as primary for consistency */
-  --accent-foreground: oklch(1 0 0); /* White */
-  --destructive: oklch(0.6 0.25 25); /* Red for errors */
-  --destructive-foreground: oklch(1 0 0); /* White */
-  --border: oklch(0.9 0 0); /* Light border */
-  --input: oklch(1 0 0); /* White input background */
-  --ring: oklch(0.5 0.25 330 / 0.2); /* Primary color with opacity for focus */
-  --chart-1: oklch(0.5 0.25 330); /* Primary color */
-  --chart-2: oklch(0.97 0 0); /* Light gray */
-  --chart-3: oklch(0 0 0); /* Black */
-  --chart-4: oklch(1 0 0); /* White */
-  --chart-5: oklch(0.9 0 0); /* Border gray */
-  --radius: 0.5rem; /* Slightly smaller radius for modern look */
-  --sidebar: oklch(1 0 0); /* White */
-  --sidebar-foreground: oklch(0 0 0); /* Black */
-  --sidebar-primary: oklch(0.5 0.25 330); /* Primary magenta */
-  --sidebar-primary-foreground: oklch(1 0 0); /* White */
-  --sidebar-accent: oklch(0.97 0 0); /* Light gray */
-  --sidebar-accent-foreground: oklch(0 0 0); /* Black */
-  --sidebar-border: oklch(0.9 0 0); /* Light border */
-  --sidebar-ring: oklch(0.5 0.25 330 / 0.2); /* Primary with opacity */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0 0 0);
+  --card: oklch(0.97 0 0); 
+  --card-foreground: oklch(0 0 0); 
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0 0 0);
+  --primary: oklch(0.5 0.25 330); 
+  --primary-foreground: oklch(1 0 0); 
+  --secondary: oklch(0 0 0); 
+  --secondary-foreground: oklch(1 0 0); 
+  --muted: oklch(0.97 0 0); 
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.5 0.25 330);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.6 0.25 25); 
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.9 0 0); 
+  --input: oklch(1 0 0); 
+  --ring: oklch(0.5 0.25 330 / 0.2); 
+  --chart-1: oklch(0.5 0.25 330); 
+  --chart-2: oklch(0.97 0 0); 
+  --chart-3: oklch(0 0 0);
+  --chart-4: oklch(1 0 0);
+  --chart-5: oklch(0.9 0 0); 
+  --radius: 0.5rem; 
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0 0 0);
+  --sidebar-primary: oklch(0.5 0.25 330); 
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.97 0 0); 
+  --sidebar-accent-foreground: oklch(0 0 0);
+  --sidebar-border: oklch(0.9 0 0); 
+  --sidebar-ring: oklch(0.5 0.25 330 / 0.2);
 }
 
 .dark {
