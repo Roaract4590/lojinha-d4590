@@ -188,6 +188,7 @@ export default function ProductPage() {
                   <li>• Garantia de 30 dias</li>
                 </ul>
               </div>
+              <img src="/tm1.png"/>
             </div>
           </div>
         </div>
