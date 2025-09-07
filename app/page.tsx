@@ -24,7 +24,7 @@ const products: Product[] = [
     id: 1,
     name: "Camiseta Rotaract Premium",
     price: 89.9,
-    image: "/premium-white-t-shirt-with-rotaract-logo.png",
+    image: "/foto.png",
     category: "Camisetas",
     description:
       "Camiseta premium 100% algodão com logo bordado do Rotaract. Tecido de alta qualidade, corte moderno e acabamento impecável. Ideal para eventos oficiais e uso casual.",
@@ -34,31 +34,31 @@ const products: Product[] = [
     id: 2,
     name: "Polo Distrito 4590",
     price: 129.9,
-    image: "/elegant-polo-shirt-with-district-logo.png",
+    image: "foto.png",
     category: "Camisetas",
     description:
       "Polo elegante com bordado exclusivo do Distrito 4590. Tecido piquet de primeira linha, gola reforçada e botões de qualidade superior.",
-    images: ["/elegant-polo-shirt-with-district-logo.png", "/elegant-polo-shirt-with-district-logo.png"],
+    images: ["foto.png", "foto.png"],
   },
   {
     id: 3,
     name: "Regata Esportiva",
     price: 69.9,
-    image: "/sporty-tank-top-with-rotaract-branding.png",
+    image: "/foto.png",
     category: "Camisetas",
     description:
       "Regata esportiva com tecnologia dry-fit. Perfeita para atividades físicas e eventos esportivos do Rotaract.",
-    images: ["/sporty-tank-top-with-rotaract-branding.png", "/sporty-tank-top-with-rotaract-branding.png"],
+    images: ["/foto.png", "/foto.png"],
   },
   {
     id: 4,
     name: "Camiseta Vintage",
     price: 99.9,
-    image: "/vintage-style-rotaract-t-shirt.png",
+    image: "/foto.png",
     category: "Camisetas",
     description:
       "Camiseta com design vintage exclusivo. Estampa retrô que celebra a história do Rotaract com estilo contemporâneo.",
-    images: ["/vintage-style-rotaract-t-shirt.png", "/vintage-style-rotaract-t-shirt.png"],
+    images: ["/foto.png", "/foto.png"],
   },
 
   // Seção Acessórios
@@ -66,39 +66,39 @@ const products: Product[] = [
     id: 5,
     name: "Boné Rotaract Elite",
     price: 79.9,
-    image: "/premium-cap-with-rotaract-emblem.png",
+    image: "/foto.png",
     category: "Acessórios",
     description: "Boné premium com bordado 3D do emblema Rotaract. Aba curva, ajuste traseiro e proteção UV.",
-    images: ["/premium-cap-with-rotaract-emblem.png", "/premium-cap-with-rotaract-emblem.png"],
+    images: ["/foto.png", "/foto.png"],
   },
   {
     id: 6,
     name: "Mochila Executiva",
     price: 199.9,
-    image: "/executive-backpack-with-rotaract-logo.png",
+    image: "/foto.png",
     category: "Acessórios",
     description:
       "Mochila executiva com compartimento para laptop, múltiplos bolsos organizadores e logo discreto do Rotaract.",
-    images: ["/executive-backpack-with-rotaract-logo.png", "/executive-backpack-with-rotaract-logo.png"],
+    images: ["/foto.png", "/foto.png"],
   },
   {
     id: 7,
     name: "Caneca Premium",
     price: 39.9,
-    image: "/premium-ceramic-mug-with-rotaract-design.png",
+    image: "/foto.png",
     category: "Acessórios",
     description:
       "Caneca de porcelana premium com design exclusivo do Rotaract. Capacidade de 350ml, resistente ao microondas.",
-    images: ["/premium-ceramic-mug-with-rotaract-design.png", "/premium-ceramic-mug-with-rotaract-design.png"],
+    images: ["/foto.png", "/foto.png"],
   },
   {
     id: 8,
     name: "Chaveiro Exclusivo",
     price: 19.9,
-    image: "/exclusive-rotaract-keychain.png",
+    image: "foto.png",
     category: "Acessórios",
     description: "Chaveiro em metal nobre com acabamento premium. Design exclusivo do Rotaract Distrito 4590.",
-    images: ["/exclusive-rotaract-keychain.png", "/exclusive-rotaract-keychain.png"],
+    images: ["foto.png", "foto.png"],
   },
 
   // Seção Uniformes
@@ -106,7 +106,7 @@ const products: Product[] = [
     id: 9,
     name: "Camisa Social Rotaract",
     price: 159.9,
-    image: "/formal-dress-shirt-with-rotaract-embroidery.png",
+    image: "/foto.png",
     category: "Uniformes",
     description: "Camisa social de alta qualidade com bordado discreto do Rotaract. Tecido anti-rugas, corte slim fit.",
     images: ["/formal-dress-shirt-with-rotaract-embroidery.png", "/formal-dress-shirt-with-rotaract-embroidery.png"],
@@ -115,39 +115,39 @@ const products: Product[] = [
     id: 10,
     name: "Blazer Distrito 4590",
     price: 299.9,
-    image: "/elegant-blazer-with-district-branding.png",
+    image: "/foto.png",
     category: "Uniformes",
     description:
       "Blazer elegante com forro personalizado e bordado exclusivo do Distrito 4590. Corte moderno e tecido premium.",
-    images: ["/elegant-blazer-with-district-branding.png", "/elegant-blazer-with-district-branding.png"],
+    images: ["/foto.png", "/foto.png"],
   },
   {
     id: 11,
     name: "Gravata Oficial",
     price: 89.9,
-    image: "/official-rotaract-tie.png",
+    image: "/foto.png",
     category: "Uniformes",
     description: "Gravata oficial com padrão exclusivo do Rotaract. Seda pura, largura clássica de 8cm.",
-    images: ["/official-rotaract-tie.png", "/official-rotaract-tie.png"],
+    images: ["/foto.png", "/foto.png"],
   },
   {
     id: 12,
     name: "Colete Representativo",
     price: 179.9,
-    image: "/representative-vest-with-rotaract-logo.png",
+    image: "/foto.png",
     category: "Uniformes",
     description: "Colete representativo para eventos oficiais. Tecido nobre com bordados em fio dourado.",
-    images: ["/representative-vest-with-rotaract-logo.png", "/representative-vest-with-rotaract-logo.png"],
+    images: ["/foto.png", "/foto.png"],
   },
 ]
 
-const featuredProduct = products[1] // Polo Distrito 4590
+const featuredProduct = products[1] 
 
 export default function RotaractLandingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const handleBuyNow = (product: Product, quantity = 1) => {
-    const whatsappNumber = "5511999999999" // Substitua pelo número real
+    const whatsappNumber = "5511999999999" 
     const message = `Olá! Gostaria de comprar:\n\n*${product.name}*\nQuantidade: ${quantity}\nPreço: R$ ${product.price.toFixed(2).replace(".", ",")}\nTotal: R$ ${(product.price * quantity).toFixed(2).replace(".", ",")}\n\nPoderia me ajudar com o pedido?`
 
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`

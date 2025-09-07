@@ -23,23 +23,22 @@ const products: Product[] = [
     id: 1,
     name: "Camiseta Rotaract Premium",
     price: 89.9,
-    image: "/premium-white-t-shirt-with-rotaract-logo.png",
+    image: "/foto.png",
     category: "Camisetas",
     description:
       "Camiseta premium 100% algodão com logo bordado do Rotaract. Tecido de alta qualidade, corte moderno e acabamento impecável. Ideal para eventos oficiais e uso casual. Disponível em várias cores e tamanhos.",
-    images: ["/premium-white-t-shirt-with-rotaract-logo.png", "/premium-white-t-shirt-with-rotaract-logo.png"],
+    images: ["/foto.png", "/foto.png"],
   },
   {
     id: 2,
     name: "Polo Distrito 4590",
     price: 129.9,
-    image: "/elegant-polo-shirt-with-district-logo.png",
+    image: "/foto.png",
     category: "Camisetas",
     description:
       "Polo elegante com bordado exclusivo do Distrito 4590. Tecido piquet de primeira linha, gola reforçada e botões de qualidade superior. Perfeita para reuniões e eventos formais.",
-    images: ["/elegant-polo-shirt-with-district-logo.png", "/elegant-polo-shirt-with-district-logo.png"],
+    images: ["/foto.png", "/foto.png"],
   },
-  // ... outros produtos
 ]
 
 export default function ProductPage() {
@@ -67,7 +66,7 @@ export default function ProductPage() {
   }
 
   const handleBuyNow = () => {
-    const whatsappNumber = "5511999999999" // Substitua pelo número real
+    const whatsappNumber = "5511999999999" 
     const message = `Olá! Gostaria de comprar:\n\n*${product.name}*\nQuantidade: ${quantity}\nPreço unitário: R$ ${product.price.toFixed(2).replace(".", ",")}\nTotal: R$ ${(product.price * quantity).toFixed(2).replace(".", ",")}\n\nPoderia me ajudar com o pedido?`
 
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
