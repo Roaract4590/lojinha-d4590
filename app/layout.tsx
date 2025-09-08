@@ -4,6 +4,8 @@ import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
+import { CartProvider } from "@/contexts/cart-context"
+import { CartSidebar } from "@/components/cart-sidebar"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -23,18 +25,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
-        <Suspense
-          fallback={
-            <div className="min-h-screen bg-white flex items-center justify-center">
-              <div className="text-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#d41367] mx-auto mb-4"></div>
-                <p className="text-gray-600 font-light">Carregando...</p>
+        <CartProvider>
+          <Suspense
+            fallback={
+              <div className="min-h-screen bg-white flex items-center justify-center">
+                <div className="text-center">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#d41367] mx-auto mb-4"></div>
+                  <p className="text-gray-600 font-light">Carregando...</p>
+                </div>
               </div>
-            </div>
-          }
-        >
-          {children}
-        </Suspense>
+            }
+          >
+            {children}
+          </Suspense>
+          <CartSidebar />
+        </CartProvider>
         <Analytics />
       </body>
     </html>
