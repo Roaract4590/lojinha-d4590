@@ -20,7 +20,7 @@ export function CartSidebar() {
 
     const total = getCartTotal()
     const whatsappMessage = `Olá! Gostaria de fazer o seguinte pedido:\n\n${message}\n\nTotal: R$ ${total.toFixed(2)}`
-    const whatsappUrl = `https://wa.me/5511999999999?text=${encodeURIComponent(whatsappMessage)}`
+    const whatsappUrl = `https://wa.me/5519991666588?text=${encodeURIComponent(whatsappMessage)}`
 
     clearCart()
     window.open(whatsappUrl, "_blank")
