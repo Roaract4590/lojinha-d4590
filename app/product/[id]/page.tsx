@@ -1,10 +1,12 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useParams, useRouter } from "next/navigation"
-import { ArrowLeft, Plus, Minus } from "lucide-react"
+import { ArrowLeft, Plus, Minus, ShoppingCart, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { ToastContainer, useToast } from "@/components/ui/toast"
 import Link from "next/link"
 import Image from "next/image"
 
@@ -16,6 +18,13 @@ interface Product {
   category: string
   description: string
   images: string[]
+  isClothing?: boolean
+}
+
+interface CartItem {
+  product: Product
+  quantity: number
+  size?: string
 }
 
 const products: Product[] = [
@@ -28,6 +37,7 @@ const products: Product[] = [
     description:
       "Camiseta premium 100% algodão com logo bordado do Rotaract. Tecido de alta qualidade, corte moderno e acabamento impecável. Ideal para eventos oficiais e uso casual. Disponível em várias cores e tamanhos.",
     images: ["/foto.png", "/foto.png"],
+    isClothing: true,
   },
   {
     id: 2,
@@ -38,6 +48,105 @@ const products: Product[] = [
     description:
       "Polo elegante com bordado exclusivo do Distrito 4590. Tecido piquet de primeira linha, gola reforçada e botões de qualidade superior. Perfeita para reuniões e eventos formais.",
     images: ["/foto.png", "/foto.png"],
+    isClothing: true,
+  },
+  {
+    id: 3,
+    name: "Regata Esportiva",
+    price: 69.9,
+    image: "/foto.png",
+    category: "Camisetas",
+    description:
+      "Regata esportiva com tecnologia dry-fit. Perfeita para atividades físicas e eventos esportivos do Rotaract.",
+    images: ["/foto.png", "/foto.png"],
+    isClothing: true,
+  },
+  {
+    id: 4,
+    name: "Camiseta Vintage",
+    price: 99.9,
+    image: "/foto.png",
+    category: "Camisetas",
+    description:
+      "Camiseta com design vintage exclusivo. Estampa retrô que celebra a história do Rotaract com estilo contemporâneo.",
+    images: ["/foto.png", "/foto.png"],
+    isClothing: true,
+  },
+  {
+    id: 5,
+    name: "Boné Rotaract Elite",
+    price: 79.9,
+    image: "/foto.png",
+    category: "Acessórios",
+    description: "Boné premium com bordado 3D do emblema Rotaract. Aba curva, ajuste traseiro e proteção UV.",
+    images: ["/foto.png", "/foto.png"],
+  },
+  {
+    id: 6,
+    name: "Mochila Executiva",
+    price: 199.9,
+    image: "/foto.png",
+    category: "Acessórios",
+    description:
+      "Mochila executiva com compartimento para laptop, múltiplos bolsos organizadores e logo discreto do Rotaract.",
+    images: ["/foto.png", "/foto.png"],
+  },
+  {
+    id: 7,
+    name: "Caneca Premium",
+    price: 39.9,
+    image: "/foto.png",
+    category: "Acessórios",
+    description:
+      "Caneca de porcelana premium com design exclusivo do Rotaract. Capacidade de 350ml, resistente ao microondas.",
+    images: ["/foto.png", "/foto.png"],
+  },
+  {
+    id: 8,
+    name: "Chaveiro Exclusivo",
+    price: 19.9,
+    image: "/foto.png",
+    category: "Acessórios",
+    description: "Chaveiro em metal nobre com acabamento premium. Design exclusivo do Rotaract Distrito 4590.",
+    images: ["/foto.png", "/foto.png"],
+  },
+  {
+    id: 9,
+    name: "Camisa Social Rotaract",
+    price: 159.9,
+    image: "/foto.png",
+    category: "Uniformes",
+    description: "Camisa social de alta qualidade com bordado discreto do Rotaract. Tecido anti-rugas, corte slim fit.",
+    images: ["/foto.png", "/foto.png"],
+    isClothing: true,
+  },
+  {
+    id: 10,
+    name: "Blazer Distrito 4590",
+    price: 299.9,
+    image: "/foto.png",
+    category: "Uniformes",
+    description:
+      "Blazer elegante com forro personalizado e bordado exclusivo do Distrito 4590. Corte moderno e tecido premium.",
+    images: ["/foto.png", "/foto.png"],
+  },
+  {
+    id: 11,
+    name: "Gravata Oficial",
+    price: 89.9,
+    image: "/foto.png",
+    category: "Uniformes",
+    description: "Gravata oficial com padrão exclusivo do Rotaract. Seda pura, largura clássica de 8cm.",
+    images: ["/foto.png", "/foto.png"],
+  },
+  {
+    id: 12,
+    name: "Colete Representativo",
+    price: 179.9,
+    image: "/foto.png",
+    category: "Uniformes",
+    description: "Colete representativo para eventos oficiais. Tecido nobre com bordados em fio dourado.",
+    images: ["/foto.png", "/foto.png"],
   },
 ]
 
@@ -46,9 +155,26 @@ export default function ProductPage() {
   const router = useRouter()
   const [quantity, setQuantity] = useState(1)
   const [selectedImage, setSelectedImage] = useState(0)
+  const [selectedSizes, setSelectedSizes] = useState<string[]>([])
+  const [cart, setCart] = useState<CartItem[]>([])
+  const [isCartOpen, setIsCartOpen] = useState(false)
+  const { messages, showToast, removeToast } = useToast()
 
   const productId = Number.parseInt(params.id as string)
   const product = products.find((p) => p.id === productId)
+
+  useEffect(() => {
+    const savedCart = JSON.parse(localStorage.getItem("rotaract-cart") || "[]")
+    setCart(savedCart)
+
+    const handleCartUpdate = () => {
+      const updatedCart = JSON.parse(localStorage.getItem("rotaract-cart") || "[]")
+      setCart(updatedCart)
+    }
+
+    window.addEventListener("cartUpdated", handleCartUpdate)
+    return () => window.removeEventListener("cartUpdated", handleCartUpdate)
+  }, [])
 
   if (!product) {
     return (
@@ -65,20 +191,142 @@ export default function ProductPage() {
     )
   }
 
-  const handleBuyNow = () => {
-    const whatsappNumber = "+5519991666588" 
-    const message = `Olá! Gostaria de comprar:\n\n*${product.name}*\nQuantidade: ${quantity}\nPreço unitário: R$ ${product.price.toFixed(2).replace(".", ",")}\nTotal: R$ ${(product.price * quantity).toFixed(2).replace(".", ",")}\n\nPoderia me ajudar com o pedido?`
+  const removeFromCart = (productId: number, size?: string) => {
+    const updatedCart = cart.filter((item) => !(item.product.id === productId && item.size === size))
+    setCart(updatedCart)
+    localStorage.setItem("rotaract-cart", JSON.stringify(updatedCart))
+    window.dispatchEvent(new Event("cartUpdated"))
+  }
+
+  const updateQuantity = (productId: number, size: string | undefined, newQuantity: number) => {
+    if (newQuantity === 0) {
+      removeFromCart(productId, size)
+      return
+    }
+
+    const updatedCart = cart.map((item) =>
+      item.product.id === productId && item.size === size ? { ...item, quantity: newQuantity } : item,
+    )
+    setCart(updatedCart)
+    localStorage.setItem("rotaract-cart", JSON.stringify(updatedCart))
+    window.dispatchEvent(new Event("cartUpdated"))
+  }
+
+  const finalizePurchase = () => {
+    if (cart.length === 0) return
+
+    const whatsappNumber = "+5519991666588"
+    let message = "Olá! Gostaria de fazer o seguinte pedido:\n\n"
+
+    let total = 0
+    cart.forEach((item, index) => {
+      const itemTotal = item.product.price * item.quantity
+      total += itemTotal
+
+      message += `${index + 1}. *${item.product.name}*\n`
+      if (item.size) {
+        message += `   Tamanho: ${item.size}\n`
+      }
+      message += `   Quantidade: ${item.quantity}\n`
+      message += `   Preço unitário: R$ ${item.product.price.toFixed(2).replace(".", ",")}\n`
+      message += `   Subtotal: R$ ${itemTotal.toFixed(2).replace(".", ",")}\n\n`
+    })
+
+    message += `*Total do pedido: R$ ${total.toFixed(2).replace(".", ",")}*\n\n`
+    message += "Poderia me ajudar com este pedido?"
 
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+
+    setCart([])
+    localStorage.setItem("rotaract-cart", JSON.stringify([]))
+    setIsCartOpen(false)
+    window.dispatchEvent(new Event("cartUpdated"))
+
     window.open(whatsappUrl, "_blank")
   }
 
-  const increaseQuantity = () => setQuantity((prev) => prev + 1)
-  const decreaseQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
+  const addToCart = () => {
+    if (product.isClothing && selectedSizes.length !== quantity) {
+      showToast({
+        type: "warning",
+        title: "Tamanhos obrigatórios",
+        message: "Por favor, selecione o tamanho para cada item.",
+      })
+      return
+    }
+
+    const existingCart = JSON.parse(localStorage.getItem("rotaract-cart") || "[]")
+
+    if (product.isClothing) {
+      selectedSizes.forEach((size) => {
+        const existingItem = existingCart.find((item: CartItem) => item.product.id === product.id && item.size === size)
+
+        if (existingItem) {
+          existingItem.quantity += 1
+        } else {
+          existingCart.push({ product, quantity: 1, size })
+        }
+      })
+    } else {
+      const existingItem = existingCart.find((item: CartItem) => item.product.id === product.id)
+
+      if (existingItem) {
+        existingItem.quantity += quantity
+      } else {
+        existingCart.push({ product, quantity })
+      }
+    }
+
+    localStorage.setItem("rotaract-cart", JSON.stringify(existingCart))
+    setCart(existingCart)
+    window.dispatchEvent(new Event("cartUpdated"))
+
+    showToast({
+      type: "success",
+      title: "Produto adicionado",
+      message: "Produto adicionado ao carrinho com sucesso!",
+    })
+
+    setQuantity(1)
+    setSelectedSizes([])
+  }
+
+  const increaseQuantity = () => {
+    const newQuantity = quantity + 1
+    setQuantity(newQuantity)
+
+    if (product.isClothing) {
+      setSelectedSizes((prev) => [...prev, ""])
+    }
+  }
+
+  const decreaseQuantity = () => {
+    if (quantity > 1) {
+      const newQuantity = quantity - 1
+      setQuantity(newQuantity)
+
+      if (product.isClothing) {
+        setSelectedSizes((prev) => prev.slice(0, -1))
+      }
+    }
+  }
+
+  const updateSize = (index: number, size: string) => {
+    setSelectedSizes((prev) => {
+      const newSizes = [...prev]
+      newSizes[index] = size
+      return newSizes
+    })
+  }
+
+  const cartItemsCount = cart.reduce((total, item) => total + item.quantity, 0)
+  const cartTotal = cart.reduce((total, item) => total + item.product.price * item.quantity, 0)
 
   return (
     <div className="min-h-screen bg-white">
-      <header className="border-b border-gray-100 py-6 px-6">
+      <ToastContainer messages={messages} onRemove={removeToast} />
+
+      <header className="sticky top-0 z-40 bg-white border-b border-gray-100 py-6 px-6">
         <div className="container mx-auto flex items-center justify-between">
           <Button
             variant="ghost"
@@ -97,9 +345,99 @@ export default function ProductPage() {
               className="h-10 w-auto"
             />
           </Link>
-          <div></div>
+          <Button variant="ghost" size="sm" className="relative hover:bg-gray-50" onClick={() => setIsCartOpen(true)}>
+            <ShoppingCart className="w-5 h-5 text-black" />
+            {cartItemsCount > 0 && (
+              <Badge className="absolute -top-2 -right-2 bg-[#d41367] text-white text-xs min-w-[20px] h-5 flex items-center justify-center rounded-full">
+                {cartItemsCount}
+              </Badge>
+            )}
+          </Button>
         </div>
       </header>
+
+      {isCartOpen && (
+        <div className="fixed inset-0 z-50 overflow-hidden" onClick={() => setIsCartOpen(false)}>
+          <div
+            className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl border-l border-gray-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex flex-col h-full">
+              <div className="flex items-center justify-between p-6 border-b">
+                <h2 className="text-xl font-light text-black">Carrinho</h2>
+                <Button variant="ghost" size="sm" onClick={() => setIsCartOpen(false)}>
+                  <X className="w-5 h-5" />
+                </Button>
+              </div>
+
+              <div className="flex-1 overflow-y-auto p-6">
+                {cart.length === 0 ? (
+                  <p className="text-gray-500 text-center mt-8">Seu carrinho está vazio</p>
+                ) : (
+                  <div className="space-y-4">
+                    {cart.map((item, index) => (
+                      <div
+                        key={`${item.product.id}-${item.size || "no-size"}`}
+                        className="flex items-center space-x-4 p-4 border rounded-lg"
+                      >
+                        <img
+                          src={item.product.image || "/placeholder.svg"}
+                          alt={item.product.name}
+                          className="w-16 h-16 object-cover rounded"
+                        />
+                        <div className="flex-1">
+                          <h3 className="font-medium text-sm">{item.product.name}</h3>
+                          {item.size && <p className="text-xs text-gray-500">Tamanho: {item.size}</p>}
+                          <p className="text-sm font-light">R$ {item.product.price.toFixed(2).replace(".", ",")}</p>
+                          <div className="flex items-center space-x-2 mt-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => updateQuantity(item.product.id, item.size, item.quantity - 1)}
+                              className="w-8 h-8 p-0"
+                            >
+                              <Minus className="w-3 h-3" />
+                            </Button>
+                            <span className="text-sm w-8 text-center">{item.quantity}</span>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => updateQuantity(item.product.id, item.size, item.quantity + 1)}
+                              className="w-8 h-8 p-0"
+                            >
+                              <Plus className="w-3 h-3" />
+                            </Button>
+                          </div>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => removeFromCart(item.product.id, item.size)}
+                          className="text-red-500 hover:text-red-700"
+                        >
+                          <X className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {cart.length > 0 && (
+                <div className="border-t p-6">
+                  <div className="flex justify-between items-center mb-4">
+                    <span className="text-lg font-light">Total:</span>
+                    <span className="text-xl font-medium">R$ {cartTotal.toFixed(2).replace(".", ",")}</span>
+                  </div>
+                  <Button className="w-full bg-[#d41367] hover:bg-[#b8115a] text-white" onClick={finalizePurchase}>
+                    Finalizar Pedido
+                  </Button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="container mx-auto px-6 py-12">
         <div className="grid lg:grid-cols-2 gap-16 max-w-7xl mx-auto">
@@ -167,12 +505,41 @@ export default function ProductPage() {
               </div>
             </div>
 
+            {product.isClothing && (
+              <div className="space-y-4">
+                <label className="text-sm font-light tracking-wide uppercase text-gray-600">
+                  Tamanhos {quantity > 1 && `(${quantity} itens)`}
+                </label>
+                <div className="space-y-3">
+                  {Array.from({ length: quantity }, (_, index) => (
+                    <div key={index} className="flex items-center gap-3">
+                      <span className="text-sm text-gray-500 w-16">Item {index + 1}:</span>
+                      <Select value={selectedSizes[index] || ""} onValueChange={(value) => updateSize(index, value)}>
+                        <SelectTrigger className="flex-1">
+                          <SelectValue placeholder="Selecione o tamanho" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="PP">PP</SelectItem>
+                          <SelectItem value="P">P</SelectItem>
+                          <SelectItem value="M">M</SelectItem>
+                          <SelectItem value="G">G</SelectItem>
+                          <SelectItem value="GG">GG</SelectItem>
+                          <SelectItem value="XG">XG</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <Button
               size="lg"
               className="w-full text-sm py-6 bg-[#d41367] hover:bg-[#b8115a] text-white font-light tracking-wide uppercase transition-all duration-300"
-              onClick={handleBuyNow}
+              onClick={addToCart}
             >
-              Comprar Agora - R$ {(product.price * quantity).toFixed(2).replace(".", ",")}
+              <ShoppingCart className="w-4 h-4 mr-2" />
+              Adicionar ao Carrinho - R$ {(product.price * quantity).toFixed(2).replace(".", ",")}
             </Button>
 
             <div className="space-y-6 pt-8 border-t border-gray-100">
@@ -188,7 +555,7 @@ export default function ProductPage() {
                   <li>• Garantia de 30 dias</li>
                 </ul>
               </div>
-              <img src="/tm1.png"/>
+              <img src="/tm1.png" />
             </div>
           </div>
         </div>
