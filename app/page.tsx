@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Menu, X, ShoppingCart, ChevronLeft, ChevronRight } from "lucide-react"
+import { Menu, X, ShoppingCart, ChevronLeft, ChevronRight, Instagram } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -275,13 +275,32 @@ const addToCart = (product: Product, size?: string) => {
           </section>
         )
       })}
-
       <footer className="bg-black text-white py-12 sm:py-16 px-4 sm:px-6">
         <div className="mx-auto w-full max-w-7xl text-center">
           <div className="flex items-center justify-center mb-6 sm:mb-8">
-            <Image src="/rotaract-logo.png" alt="Rotaract Distrito 4590" width={200} height={67} className="h-12 sm:h-16 w-auto brightness-0 invert" />
+            <Image
+              src="/rotaract-logo.png"
+              alt="Rotaract Distrito 4590"
+              width={200}
+              height={67}
+              className="h-12 sm:h-16 w-auto brightness-0 invert"
+            />
           </div>
-          <p className="text-xs sm:text-sm opacity-70 font-light tracking-wide">© 2025 ROTARACT DISTRITO 4590. TODOS OS DIREITOS RESERVADOS.</p>
+          <div className="mb-5 flex items-center justify-center gap-3">
+            <Link
+              href="https://www.instagram.com/rotaract4590/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="inline-flex items-center gap-2 rounded-full px-4 py-2 bg-white/10 hover:bg-white/20 transition"
+            >
+              <Instagram className="w-5 h-5" />
+              <span className="text-sm">Instagram</span>
+            </Link>
+          </div>
+          <p className="text-xs sm:text-sm opacity-70 font-light tracking-wide">
+            © 2025 ROTARACT DISTRITO 4590. TODOS OS DIREITOS RESERVADOS.
+          </p>
         </div>
       </footer>
     </div>

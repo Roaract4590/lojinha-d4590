@@ -130,7 +130,7 @@ export const products: Product[] = [
     isBestSeller: true,
     description:
       "Pin metálico esmaltado com fixação traseira. Ideal para lapelas, mochilas e bonés.",
-    images: ["/produtos/pin.jpg", "/foto.png"],
+    images: ["/produtos/pin.jpg", "/foto.png", "/foto.png", "/foto.png", "/foto.png","/foto.png", "/foto.png", "/foto.png"],
     detailHtml: `
       <h3 class="text-xl sm:text-2xl font-light text-black tracking-tight">Descrição do Produto</h3>
       <p class="text-gray-600 leading-relaxed font-light text-base sm:text-lg">

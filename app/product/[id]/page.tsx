@@ -11,6 +11,11 @@ import { useCart } from "@/contexts/cart-context"
 import Link from "next/link"
 import Image from "next/image"
 import { products } from "@/lib/products"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Navigation, Pagination } from "swiper/modules"
+import "swiper/css"
+import "swiper/css/navigation"
+import "swiper/css/pagination"
 
 export default function ProductPage() {
   const params = useParams<{ id: string }>()
@@ -24,7 +29,6 @@ export default function ProductPage() {
   const productId = Number(params?.id)
   const product = products.find((p) => p.id === productId)
 
-  // Regra: usar flag requiresSize OU detectar por texto (camisa/camiseta/regata/blusa/uniforme)
   const showSizes = useMemo(() => {
     if (!product) return false
     if (typeof product.requiresSize === "boolean") return product.requiresSize
@@ -115,17 +119,44 @@ export default function ProductPage() {
             <div className="relative w-full aspect-square bg-gray-50">
               <Image src={product.images[selectedImage] || product.image} alt={product.name} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
             </div>
-            <div className="grid grid-cols-4 gap-2 sm:gap-3">
-              {product.images.map((image, index) => (
-                <button
-                  key={`thumb-${index}`}
-                  onClick={() => setSelectedImage(index)}
-                  className={`relative w-full aspect-square overflow-hidden ${selectedImage === index ? "ring-2 ring-[#d41367]" : "hover:ring-1 hover:ring-gray-300"}`}
-                >
-                  <Image src={image || "/placeholder.svg"} alt={`${product.name} ${index + 1}`} fill sizes="25vw" className="object-cover bg-gray-50" />
-                </button>
-              ))}
-            </div>
+
+            {product.images.length > 4 ? (
+              <Swiper
+                modules={[Navigation]}
+                slidesPerView={4}
+                spaceBetween={8}
+                loop={true}
+                navigation
+                breakpoints={{
+                  480: { slidesPerView: 5, spaceBetween: 8 },
+                  768: { slidesPerView: 6, spaceBetween: 10 }
+                }}
+                className="w-full"
+              >
+                {product.images.map((image, index) => (
+                  <SwiperSlide key={`thumb-slide-${index}`}>
+                    <button
+                      onClick={() => setSelectedImage(index)}
+                      className={`relative w-full aspect-square overflow-hidden ${selectedImage === index ? "ring-2 ring-[#d41367]" : "hover:ring-1 hover:ring-gray-300"}`}
+                    >
+                      <Image src={image || "/placeholder.svg"} alt={`${product.name} ${index + 1}`} fill sizes="10vw" className="object-cover bg-gray-50" />
+                    </button>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            ) : (
+              <div className="grid grid-cols-4 gap-2 sm:gap-3">
+                {product.images.map((image, index) => (
+                  <button
+                    key={`thumb-${index}`}
+                    onClick={() => setSelectedImage(index)}
+                    className={`relative w-full aspect-square overflow-hidden ${selectedImage === index ? "ring-2 ring-[#d41367]" : "hover:ring-1 hover:ring-gray-300"}`}
+                  >
+                    <Image src={image || "/placeholder.svg"} alt={`${product.name} ${index + 1}`} fill sizes="25vw" className="object-cover bg-gray-50" />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="space-y-6 sm:space-y-8">
