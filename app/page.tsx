@@ -227,7 +227,7 @@ export default function RotaractLandingPage() {
             <nav className="hidden md:flex items-center space-x-12">
               {sections.map((section) => (
                 <button
-                  key={section.category}
+                  key={`nav-${section.category}`}
                   onClick={() => scrollToSection(section.category)}
                   className="text-black hover:text-[#d41367] transition-colors font-light text-sm tracking-wide uppercase"
                 >
@@ -261,7 +261,7 @@ export default function RotaractLandingPage() {
             <nav className="md:hidden mt-6 pb-6 border-t border-gray-100 pt-6">
               {sections.map((section) => (
                 <button
-                  key={section.category}
+                  key={`navm-${section.category}`}
                   onClick={() => scrollToSection(section.category)}
                   className="block w-full text-left py-3 text-black hover:text-[#d41367] transition-colors font-light text-sm tracking-wide uppercase"
                 >
@@ -304,7 +304,7 @@ export default function RotaractLandingPage() {
                 className="max-w-6xl mx-auto"
               >
                 {bestSellers.map((p) => (
-                  <SwiperSlide key={p.id}>
+                  <SwiperSlide key={`best-${p.id}`}>
                     <FeaturedCard p={p} />
                   </SwiperSlide>
                 ))}
@@ -318,7 +318,7 @@ export default function RotaractLandingPage() {
         const sectionProducts = products.filter((p) => p.category === section.category)
 
         return (
-          <section key={section.category} id={section.category.toLowerCase()} className="py-20 px-6">
+          <section key={`sec-${section.category}`} id={section.category.toLowerCase()} className="py-20 px-6">
             <div className="container mx-auto">
               <h2 className="text-4xl md:text-5xl font-light text-center mb-16 text-black tracking-tight">
                 {section.title}
@@ -345,7 +345,7 @@ export default function RotaractLandingPage() {
                     className="pb-12"
                   >
                     {sectionProducts.map((product) => (
-                      <SwiperSlide key={product.id}>
+                      <SwiperSlide key={`slide-${section.category}-${product.id}`}>
                         <Card className="group hover:shadow-lg transition-all duration-300 bg-white border border-gray-200 rounded-lg overflow-hidden h-full">
                           <CardContent className="p-0 h-full flex flex-col">
                             <Link href={`/product/${product.id}`}>
@@ -418,9 +418,9 @@ export default function RotaractLandingPage() {
                 </div>
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-                  {sectionProducts.map((product) => (
+                  {sectionProducts.map((product, idx) => (
                     <Card
-                      key={product.id}
+                      key={`grid-${section.category}-${product.id}-${idx}`}
                       className="group hover:shadow-lg transition-all duration-300 bg-white border border-gray-200 rounded-lg overflow-hidden"
                     >
                       <CardContent className="p-0 h-full flex flex-col">
