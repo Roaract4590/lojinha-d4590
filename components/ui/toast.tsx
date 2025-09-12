@@ -20,7 +20,7 @@ const Toast = ({ message, onRemove }: ToastProps) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       onRemove(message.id)
-    }, message.duration || 3000)
+    }, message.duration || 1000)
 
     return () => clearTimeout(timer)
   }, [message.id, message.duration, onRemove])
