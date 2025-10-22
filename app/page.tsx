@@ -39,6 +39,7 @@ const addToCart = (product: Product, size?: string) => {
   const sections = [
     { title: "Camisetas Premium", category: "Camisetas" },
     { title: "Acessórios Exclusivos", category: "Acessórios" },
+    { title: "Kits/Combos", category: "Kits/Combos" },
   ]
   const scrollToSection = (category: string) => {
     document.getElementById(category.toLowerCase())?.scrollIntoView({ behavior: "smooth" })
