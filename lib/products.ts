@@ -19,7 +19,7 @@ export const products: Product[] = [
   {
     id: 1,
     name: "Caneca 500mL",
-    price: 0,
+    price: 20,
     image: "/produtos/caneca-500.jpg",
     category: "Acessórios",
     description:
@@ -38,7 +38,7 @@ export const products: Product[] = [
   {
     id: 2,
     name: "Caneca 600mL",
-    price: 0,
+    price: 23,
     image: "/produtos/caneca-600.jpg",
     category: "Acessórios",
     description:
@@ -56,7 +56,7 @@ export const products: Product[] = [
   {
     id: 3,
     name: "Caneca 850mL",
-    price: 0,
+    price: 25,
     image: "/produtos/caneca-850.jpg",
     category: "Acessórios",
     description:
@@ -114,9 +114,9 @@ export const products: Product[] = [
   {
     id: 6,
     name: "Adesivos vinil 5x5cm",
-    price: 0,
+    price: 1.50,
     image: "/produtos/adesivo-5x5.jpg",
-    category: "Adesivos",
+    category: "Acessórios",
     description:
       "Adesivos em vinil 5x5cm com recorte preciso e resistência à água e à luz.",
     images: ["/produtos/adesivo-5x5.jpg"],
@@ -134,7 +134,7 @@ export const products: Product[] = [
   {
     id: 7,
     name: "Caneca 500mL + tirante",
-    price: 0,
+    price: 40,
     image: "/produtos/kit-500-tirante.jpg",
     category: "Kits/Combos",
     description:
@@ -152,7 +152,7 @@ export const products: Product[] = [
   {
     id: 8,
     name: "Caneca 600mL + tirante",
-    price: 0,
+    price: 43,
     image: "/produtos/kit-600-tirante.jpg",
     category: "Kits/Combos",
     description:
@@ -169,7 +169,7 @@ export const products: Product[] = [
   {
     id: 9,
     name: "Caneca 850mL + tirante",
-    price: 0,
+    price: 45,
     image: "/produtos/kit-850-tirante.jpg",
     category: "Kits/Combos",
     description:
@@ -188,7 +188,7 @@ export const products: Product[] = [
   {
     id: 10,
     name: "Camiseta Preta e Branca",
-    price: 0,
+    price: 55,
     image: "/produtos/camiseta-preta-branca.jpg",
     category: "Camisetas",
     description:
@@ -215,7 +215,7 @@ export const products: Product[] = [
   {
     id: 11,
     name: "Camiseta Preta",
-    price: 0,
+    price: 60,
     image: "/produtos/camiseta-preta.jpg",
     category: "Camisetas",
     description:
@@ -237,7 +237,7 @@ export const products: Product[] = [
   {
     id: 12,
     name: "Camiseta Rosa",
-    price: 0,
+    price: 60,
     image: "/produtos/camiseta-rosa.jpg",
     category: "Camisetas",
     description:
@@ -258,7 +258,7 @@ export const products: Product[] = [
   {
     id: 13,
     name: "Camiseta Rosa e Preta",
-    price: 0,
+    price: 55,
     image: "/produtos/camiseta-rosa-preta.jpg",
     category: "Camisetas",
     description:
