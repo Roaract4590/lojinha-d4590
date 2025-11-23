@@ -36,9 +36,9 @@ export default function RotaractLandingPage() {
 
   const cartItemsCount = getCartItemsCount()
   const sections = [
-    { title: "Camisetas Premium", category: "Camisetas" },
-    { title: "Acessórios Exclusivos", category: "Acessórios" },
-    { title: "Kits/Combos", category: "Kits/Combos" },
+    { title: "Vestuário", category: "Camisetas" },
+    { title: "Acessórios", category: "Acessórios" },
+    { title: "Combos", category: "Kits/Combos" },
   ]
   const scrollToSection = (category: string) => {
     document.getElementById(category.toLowerCase())?.scrollIntoView({ behavior: "smooth" })
@@ -131,23 +131,19 @@ function CarouselBestSellers({ items }: { items: Product[] }) {
           nextEl: nextRef.current,
         }}
         onBeforeInit={(swiper) => {
-          // garante que navigation é um objeto com os elementos
           const nav = (swiper.params.navigation ?? {}) as any
           nav.prevEl = prevRef.current
           nav.nextEl = nextRef.current
           nav.enabled = true
-          // @ts-ignore
           swiper.params.navigation = nav
         }}
         onSwiper={(swiper) => {
-          // reanexa as refs após montar
           setTimeout(() => {
             if (!prevRef.current || !nextRef.current) return
             const nav = (swiper.params.navigation ?? {}) as any
             nav.prevEl = prevRef.current
             nav.nextEl = nextRef.current
             nav.enabled = true
-            // @ts-ignore
             swiper.params.navigation = nav
             swiper.navigation.destroy()
             swiper.navigation.init()

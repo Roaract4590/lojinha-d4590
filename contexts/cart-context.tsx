@@ -30,15 +30,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [cartItems, setCartItems] = useState<CartItem[]>([])
   const [isCartOpen, setIsCartOpen] = useState(false)
 
-  // Load cart from localStorage on mount
   useEffect(() => {
     const savedCart = localStorage.getItem("rotaract-cart")
     if (savedCart) {
       setCartItems(JSON.parse(savedCart))
     }
   }, [])
-
-  // Save cart to localStorage whenever it changes
+  
   useEffect(() => {
     localStorage.setItem("rotaract-cart", JSON.stringify(cartItems))
   }, [cartItems])
