@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { Menu, X, ShoppingCart, ChevronLeft, ChevronRight, Instagram } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -23,17 +23,16 @@ export default function RotaractLandingPage() {
   const [selectedSizes, setSelectedSizes] = useState<{ [key: number]: string }>({})
   const { messages, showToast, removeToast } = useToast()
 
-const addToCart = (product: Product, size?: string) => {
-  const needsSize = product.isClothing || product.requiresSize
-  if (needsSize && !size) {
-    showToast({ type: "warning", title: "Tamanho obrigatório", message: "Por favor, selecione um tamanho para este produto." })
-    return
+  const addToCart = (product: Product, size?: string) => {
+    const needsSize = product.isClothing || product.requiresSize
+    if (needsSize && !size) {
+      showToast({ type: "warning", title: "Tamanho obrigatório", message: "Por favor, selecione um tamanho para este produto." })
+      return
+    }
+    addToCartContext({ id: product.id, name: product.name, price: product.price, image: product.image, size })
+    showToast({ type: "success", title: "Produto adicionado", message: "Produto adicionado ao carrinho com sucesso!" })
+    if (needsSize) setSelectedSizes((prev) => ({ ...prev, [product.id]: "" }))
   }
-  addToCartContext({ id: product.id, name: product.name, price: product.price, image: product.image, size })
-  showToast({ type: "success", title: "Produto adicionado", message: "Produto adicionado ao carrinho com sucesso!" })
-  if (needsSize) setSelectedSizes((prev) => ({ ...prev, [product.id]: "" }))
-}
-
 
   const cartItemsCount = getCartItemsCount()
   const sections = [
@@ -70,22 +69,22 @@ const addToCart = (product: Product, size?: string) => {
               <Badge variant="outline" className="border-gray-300 text-gray-600 font-light whitespace-nowrap">Frete Grátis</Badge>
             </div>
             {(p.isClothing || p.requiresSize) && (
-            <div className="mb-4 md:mb-6">
-              <Select
-                value={selectedSizes[p.id] || ""}
-                onValueChange={(v) => setSelectedSizes((prev) => ({ ...prev, [p.id]: v }))}
-              >
-                <SelectTrigger className="w-full h-10 md:h-11">
-                  <SelectValue placeholder="Selecione o tamanho" />
-                </SelectTrigger>
-                <SelectContent>
-                  {["PP","P","M","G","GG","XG"].map(t => (
-                    <SelectItem key={t} value={t}>{t}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          )}
+              <div className="mb-4 md:mb-6">
+                <Select
+                  value={selectedSizes[p.id] || ""}
+                  onValueChange={(v) => setSelectedSizes((prev) => ({ ...prev, [p.id]: v }))}
+                >
+                  <SelectTrigger className="w-full h-10 md:h-11">
+                    <SelectValue placeholder="Selecione o tamanho" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {["PP","P","M","G","GG","XG"].map(t => (
+                      <SelectItem key={t} value={t}>{t}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <Link href={`/product/${p.id}`} className="w-full">
                 <Button variant="outline" className="w-full border-black text-black hover:bg-black hover:text-white transition-all duration-300 font-light text-sm tracking-wide uppercase">Ver Detalhes</Button>
@@ -97,6 +96,75 @@ const addToCart = (product: Product, size?: string) => {
       </CardContent>
     </Card>
   )
+
+function CarouselBestSellers({ items }: { items: Product[] }) {
+  const prevRef = useRef<HTMLButtonElement | null>(null)
+  const nextRef = useRef<HTMLButtonElement | null>(null)
+
+  return (
+    <div className="relative">
+      <button
+        ref={prevRef}
+        className="hidden md:flex items-center justify-center absolute -left-2 lg:-left-4 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg rounded-full p-2 hover:bg-gray-50"
+        aria-label="Anterior"
+      >
+        <ChevronLeft className="w-5 h-5 text-gray-600" />
+      </button>
+
+      <button
+        ref={nextRef}
+        className="hidden md:flex items-center justify-center absolute -right-2 lg:-right-4 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg rounded-full p-2 hover:bg-gray-50"
+        aria-label="Próximo"
+      >
+        <ChevronRight className="w-5 h-5 text-gray-600" />
+      </button>
+
+      <Swiper
+        modules={[Navigation, Pagination, Autoplay]}
+        slidesPerView={1}
+        spaceBetween={16}
+        loop
+        autoplay={{ delay: 4500, disableOnInteraction: false }}
+        pagination={{ clickable: true }}
+        navigation={{
+          prevEl: prevRef.current,
+          nextEl: nextRef.current,
+        }}
+        onBeforeInit={(swiper) => {
+          // garante que navigation é um objeto com os elementos
+          const nav = (swiper.params.navigation ?? {}) as any
+          nav.prevEl = prevRef.current
+          nav.nextEl = nextRef.current
+          nav.enabled = true
+          // @ts-ignore
+          swiper.params.navigation = nav
+        }}
+        onSwiper={(swiper) => {
+          // reanexa as refs após montar
+          setTimeout(() => {
+            if (!prevRef.current || !nextRef.current) return
+            const nav = (swiper.params.navigation ?? {}) as any
+            nav.prevEl = prevRef.current
+            nav.nextEl = nextRef.current
+            nav.enabled = true
+            // @ts-ignore
+            swiper.params.navigation = nav
+            swiper.navigation.destroy()
+            swiper.navigation.init()
+            swiper.navigation.update()
+          })
+        }}
+        className="w-full"
+      >
+        {items.map((p) => (
+          <SwiperSlide key={`best-${p.id}`}>
+            <FeaturedCard p={p} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+  )
+}
 
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
@@ -154,13 +222,7 @@ const addToCart = (product: Product, size?: string) => {
             {bestSellers.length === 1 ? (
               <FeaturedCard p={bestSellers[0]} />
             ) : (
-              <Swiper modules={[Navigation, Pagination, Autoplay]} slidesPerView={1} spaceBetween={16} loop autoplay={{ delay: 4500, disableOnInteraction: false }} pagination={{ clickable: true }} navigation className="w-full">
-                {bestSellers.map((p) => (
-                  <SwiperSlide key={`best-${p.id}`}>
-                    <FeaturedCard p={p} />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+              <CarouselBestSellers items={bestSellers} />
             )}
           </div>
         </section>
@@ -201,7 +263,7 @@ const addToCart = (product: Product, size?: string) => {
                                 </Link>
                                 <p className="text-lg sm:text-xl font-normal text-black mb-4">R$ {product.price.toFixed(2).replace(".", ",")}</p>
                               </div>
-                                {(product.isClothing || product.requiresSize) && (
+                              {(product.isClothing || product.requiresSize) && (
                                 <div className="mb-3">
                                   <Select
                                     value={selectedSizes[product.id] || ""}
