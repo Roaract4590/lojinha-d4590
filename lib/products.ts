@@ -16,12 +16,12 @@ export const products: Product[] = [
   // CANECAS (unitárias)
   {
     id: 1,
-    name: "Caneca 500mL",
-    price: 20,
+    name: "Caneca 850mL",
+    price: 25,
     image: "/produtos/caneca.jpg",
     category: "Acessórios",
     description:
-      "Caneca 500mL em material resistente, ideal para uso diário. Acabamento brilhante e impressão de alta definição.",
+      "Caneca 850mL em material resistente, ideal para uso diário. Acabamento brilhante e impressão de alta definição.",
     images: ["/produtos/caneca-500.jpg"],
     isBestSeller: false,
     detailHtml: `
@@ -80,12 +80,12 @@ export const products: Product[] = [
   {
     id: 6,
     name: "Adesivos vinil 5x5cm",
-    price: 1.50,
-    image: "/produtos/adesivo-5x5.jpg",
+    price: 2,
+    image: "/produtos/adesivos/19.png",
     category: "Acessórios",
     description:
       "Adesivos em vinil 5x5cm com recorte preciso e resistência à água e à luz.",
-    images: ["/produtos/adesivo-5x5.jpg"],
+    images: ["/produtos/adesivos/19.png"],
     detailHtml: `
       <h3 class="text-xl sm:text-2xl font-light text-black tracking-tight">Descrição do Produto</h3>
       <ul class="text-gray-600 space-y-2 font-light list-disc pl-5">
@@ -101,7 +101,7 @@ export const products: Product[] = [
   {
     id: 8,
     name: "Caneca + tirante",
-    price: 30,
+    price: 35,
     image: "/produtos/kit-600-tirante.jpg",
     category: "Kits/Combos",
     description:
@@ -118,7 +118,7 @@ export const products: Product[] = [
   {
     id: 9,
     name: "Caneca  + Tirante + Pin",
-    price: 45,
+    price: 55,
     image: "/kit/kit1.png",
     category: "Kits/Combos",
     description:
