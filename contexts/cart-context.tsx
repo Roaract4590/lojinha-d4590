@@ -36,7 +36,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setCartItems(JSON.parse(savedCart))
     }
   }, [])
-  
+  //teste
   useEffect(() => {
     localStorage.setItem("rotaract-cart", JSON.stringify(cartItems))
   }, [cartItems])
