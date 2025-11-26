@@ -39,11 +39,11 @@ export const products: Product[] = [
     id: 4,
     name: "Pin",
     price: 20,
-    image: "/produtos/pin.jpg",
+    image: "/produtos/pin.png",
     category: "Acessórios",
     description:
       "Tirante 25mm com mosquetão metálico. Confortável para crachá, chaves e eventos.",
-    images: ["/produtos/pin.jpg"],
+    images: ["/produtos/pin.png"],
     detailHtml: `
       <h3 class="text-xl sm:text-2xl font-light text-black tracking-tight">Descrição do Produto</h3>
       <ul class="text-gray-600 space-y-2 font-light list-disc pl-5">
