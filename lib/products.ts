@@ -38,7 +38,7 @@ export const products: Product[] = [
 	{
 		id: 4,
 		name: "Pin",
-		price: 20,
+		price: 15,
 		image: "/produtos/pin.png",
 		category: "Acessórios",
 		description:
@@ -100,7 +100,7 @@ export const products: Product[] = [
 	{
 		id: 8,
 		name: "Caneca + tirante",
-		price: 35,
+		price: 30,
 		image: "/produtos/kit-600-tirante.jpg",
 		category: "Kits/Combos",
 		description: "Kit com Caneca e tirante. Presente funcional e versátil.",
@@ -116,7 +116,7 @@ export const products: Product[] = [
 	{
 		id: 9,
 		name: "Caneca  + Tirante + Pin",
-		price: 55,
+		price: 50,
 		image: "/kit/kit1.png",
 		category: "Kits/Combos",
 		description:
