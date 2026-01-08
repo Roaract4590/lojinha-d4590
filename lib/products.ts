@@ -22,12 +22,12 @@ export const products: Product[] = [
 		category: "Acessórios",
 		description:
 			"Caneca 850mL em material resistente, ideal para uso diário. Acabamento brilhante e impressão de alta definição.",
-		images: ["/produtos/caneca-500.jpg"],
+		images: ["/produtos/caneca.jpg"],
 		isBestSeller: false,
 		detailHtml: `
       <h3 class="text-xl sm:text-2xl font-light text-black tracking-tight">Descrição do Produto</h3>
       <ul class="text-gray-600 space-y-2 font-light list-disc pl-5">
-        <li>Capacidade: 500mL</li>
+        <li>Capacidade: 850mL</li>
         <li>Acabamento brilhante</li>
         <li>Impressão durável</li>
       </ul>
@@ -56,14 +56,14 @@ export const products: Product[] = [
 
 	// TIRANTES
 	{
-		id: 4,
+		id: 5,
 		name: "Tirante 25mm",
-		price: 14,
+		price: 12,
 		image: "/produtos/tirante.jpg",
 		category: "Acessórios",
 		description:
 			"Tirante 25mm com mosquetão metálico. Confortável para crachá, chaves e eventos.",
-		images: ["/produtos/tirante-25mm.jpg"],
+		images: ["/produtos/tirante.jpg"],
 		detailHtml: `
       <h3 class="text-xl sm:text-2xl font-light text-black tracking-tight">Descrição do Produto</h3>
       <ul class="text-gray-600 space-y-2 font-light list-disc pl-5">
@@ -75,6 +75,7 @@ export const products: Product[] = [
 	},
 
 	// ADESIVOS
+	/*
 	{
 		id: 6,
 		name: "Adesivos vinil 5x5cm",
@@ -93,7 +94,7 @@ export const products: Product[] = [
       </ul>
     `,
 	},
-
+ */
 	// COMBOS
 
 	{
