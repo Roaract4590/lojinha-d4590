@@ -104,7 +104,11 @@ export const products: Product[] = [
 		image: "/produtos/kit-600-tirante.jpg",
 		category: "Kits/Combos",
 		description: "Kit com Caneca e tirante. Presente funcional e versátil.",
-		images: ["/produtos/kit-600-tirante.jpg"],
+		images: [
+			"/produtos/kit-600-tirante.jpg",
+			"/produtos/caneca.jpg",
+			"/produtos/tirante.jpg",
+		],
 		detailHtml: `
       <h3 class="text-xl sm:text-2xl font-light text-black tracking-tight">O Kit Inclui</h3>
       <ul class="text-gray-600 space-y-2 font-light list-disc pl-5">
@@ -116,12 +120,17 @@ export const products: Product[] = [
 	{
 		id: 9,
 		name: "Caneca  + Tirante + Pin",
-		price: 50,
+		price: 42,
 		image: "/kit/kit1.png",
 		category: "Kits/Combos",
 		description:
 			"Kit com Caneca, tirante e pin para máxima capacidade e praticidade.",
-		images: ["/kit/kit1.png"],
+		images: [
+			"/kit/kit1.png",
+			"/produtos/caneca.jpg",
+			"/produtos/pin.png",
+			"/produtos/tirante.jpg",
+		],
 		detailHtml: `
       <h3 class="text-xl sm:text-2xl font-light text-black tracking-tight">O Kit Inclui</h3>
       <ul class="text-gray-600 space-y-2 font-light list-disc pl-5">
@@ -134,11 +143,17 @@ export const products: Product[] = [
 	{
 		id: 10,
 		name: "Camiseta + Caneca + Tirante + Pin",
-		price: 100,
+		price: 86,
 		image: "/kit/kit1.png",
 		category: "Kits/Combos",
 		description: "Kit com Camiseta rosa ou preta, Caneca, tirante e pin.",
-		images: ["/kit/kit1.png"],
+		images: [
+			"/kit/kit1.png",
+			"/produtos/caneca.jpg",
+			"/produtos/tirante.jpg",
+			"/produtos/pin.png",
+			"/produtos/camisetas/camiseta-rosa.png",
+		],
 		detailHtml: `
       <h3 class="text-xl sm:text-2xl font-light text-black tracking-tight">O Kit Inclui</h3>
       <ul class="text-gray-600 space-y-2 font-light list-disc pl-5">
