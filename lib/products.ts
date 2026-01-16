@@ -153,6 +153,7 @@ export const products: Product[] = [
 			"/produtos/tirante.jpg",
 			"/produtos/pin.png",
 			"/produtos/camisetas/camiseta-rosa.png",
+			"/produtos/camisetas/camiseta-preta.png",
 		],
 		detailHtml: `
       <h3 class="text-xl sm:text-2xl font-light text-black tracking-tight">O Kit Inclui</h3>
