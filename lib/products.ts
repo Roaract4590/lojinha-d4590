@@ -57,7 +57,7 @@ export const products: Product[] = [
 	// TIRANTES
 	{
 		id: 5,
-		name: "Tirante 25mm",
+		name: "Tirante",
 		price: 12,
 		image: "/produtos/tirante.jpg",
 		category: "Acessórios",
@@ -67,8 +67,6 @@ export const products: Product[] = [
 		detailHtml: `
       <h3 class="text-xl sm:text-2xl font-light text-black tracking-tight">Descrição do Produto</h3>
       <ul class="text-gray-600 space-y-2 font-light list-disc pl-5">
-        <li>Largura: 25mm</li>
-        <li>Comprimento total: ~90cm</li>
         <li>Mosquetão metálico</li>
       </ul>
     `,
