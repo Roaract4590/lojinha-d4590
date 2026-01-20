@@ -173,7 +173,7 @@ export const products: Product[] = [
 		category: "Camisetas",
 		description:
 			"Camiseta preta 100% algodão, confortável e versátil para o dia a dia.",
-		images: ["/produtos/camisetas/camiseta-preta.png", "/tm1.png"],
+		images: ["/produtos/camisetas/camiseta-preta.png"],
 		isClothing: true,
 		isBestSeller: false,
 		requiresSize: true,
@@ -182,9 +182,9 @@ export const products: Product[] = [
       <ul class="text-gray-600 space-y-2 font-light list-disc pl-5">
         <li>Tecido: 100% algodão</li>
         <li>Modelagem unissex</li>
-        <li>Acabamento premium</li>
+
       </ul>
-      <img src="/tm1.png" alt="Guia de medidas" class="mt-4 rounded" />
+   
     `,
 	},
 	{
@@ -195,7 +195,7 @@ export const products: Product[] = [
 		category: "Camisetas",
 		description:
 			"Camiseta rosa 100% algodão, confortável e versátil para o dia a dia.",
-		images: ["/produtos/camisetas/camiseta-rosa.png", "/tm1.png"],
+		images: ["/produtos/camisetas/camiseta-rosa.png"],
 		isClothing: true,
 		isBestSeller: true,
 		requiresSize: true,
@@ -204,9 +204,9 @@ export const products: Product[] = [
       <ul class="text-gray-600 space-y-2 font-light list-disc pl-5">
         <li>Tecido: 100% algodão</li>
         <li>Modelagem unissex</li>
-        <li>Acabamento premium</li>
+
       </ul>
-      <img src="/tm1.png" alt="Guia de medidas" class="mt-4 rounded" />
+   
     `,
 	},
 ];
