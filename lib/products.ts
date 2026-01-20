@@ -141,7 +141,7 @@ export const products: Product[] = [
 	{
 		id: 10,
 		name: "Camiseta + Caneca + Tirante + Pin",
-		price: 86,
+		price: 89.9,
 		image: "/kit/kit-completo.jpeg",
 		category: "Kits/Combos",
 		description: "Kit com Camiseta rosa ou preta, Caneca, tirante e pin.",

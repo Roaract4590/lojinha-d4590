@@ -70,19 +70,18 @@ export default function ProductPage() {
 			</div>
 		);
 	}
-
 	const addToCart = () => {
-		if (showSizes && selectedSizes.length !== quantity) {
+		if (showSizes && selectedSizes.some((size) => !size)) {
 			showToast({
 				type: "warning",
-				title: "Tamanhos obrigatórios",
-				message: "Por favor, selecione o tamanho para cada item.",
+				title: "Tamanho obrigatório",
+				message: "Selecione o tamanho antes de adicionar ao carrinho.",
 			});
 			return;
 		}
+
 		if (showSizes) {
 			selectedSizes.forEach((size) => {
-				if (!size) return;
 				addToCartContext({
 					id: product.id,
 					name: product.name,
@@ -102,13 +101,12 @@ export default function ProductPage() {
 				quantity,
 			);
 		}
+
 		showToast({
 			type: "success",
 			title: "Produto adicionado",
 			message: "Produto adicionado ao carrinho com sucesso!",
 		});
-		setQuantity(1);
-		setSelectedSizes(showSizes ? [""] : []);
 	};
 
 	const increaseQuantity = () => {
